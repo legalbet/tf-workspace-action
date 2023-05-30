@@ -7,7 +7,7 @@ runs:
     - run: terraform-bin init
       shell: bash
       working-directory: "${{ github.action_path }}"
-    - run: terraform-bin plan
+    - run: terraform-bin plan -var=workspace=$TF_WORKSPACE -var=cloud_organization=$TF_CLOUD_ORGANIZATION
       shell: bash
       working-directory: "${{ github.action_path }}"
     # - run: cp backend.tf "${{ github.workspace }}"
