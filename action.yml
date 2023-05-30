@@ -6,7 +6,7 @@ runs:
   steps:
     - run: ls -la && pwd
       shell: bash
-      working-directory: $GITHUB_ACTION_PATH
+      working-directory: "${{ github.action_path }}"
     # - run: terraform init
     #   shell: bash
     #   working-directory: ${{ github.workspace }}
