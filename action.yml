@@ -4,12 +4,12 @@ description: Prepare workspace for Terraform
 runs:
   using: composite
   steps:
-    - run: terraform init
+    - run: terraform-bin init
       shell: bash
       working-directory: "${{ github.action_path }}"
-    - run: terraform plan
+    - run: terraform-bin plan
       shell: bash
       working-directory: "${{ github.action_path }}"
-    - run: cp backend.tf "${{ github.workspace }}"
-      shell: bash
-      working-directory: "${{ github.action_path }}"
+    # - run: cp backend.tf "${{ github.workspace }}"
+    #   shell: bash
+    #   working-directory: "${{ github.action_path }}"
