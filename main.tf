@@ -17,24 +17,24 @@ terraform {
   backend "local" {}
 }
 
-variable "cloud_organization" {
+variable "tfe_organization_name" {
   description = "value of the organization name"
   type        = string
   default     = ""
 }
 
-variable "workspace" {
+variable "tfe_workspace_name" {
   description = "value of the workspace name"
   type        = string
 }
 
-variable "workspace_tags" {
+variable "tfe_workspace_tags" {
   description = "value of the workspace tags"
   type        = list(string)
   default     = ["tf"]
 }
 
-variable "workspace_description" {
+variable "tfe_workspace_description" {
   description = "value of the workspace description"
   type        = string
   default     = ""
@@ -51,18 +51,18 @@ output "names" {
 }
 
 resource "tfe_workspace" "workspace" {
-  count             = length(data.tfe_workspace_ids.app.ids) == 0 && var.workspace != "" ? 1 : 0
-  name              = var.workspace
-  organization      = var.cloud_organization
-  description       = var.workspace_description
-  tag_names         = var.workspace_tags
-  execution_mode    = "local"
+  count          = length(data.tfe_workspace_ids.app.ids) == 0 && var.tfe_workspace_name != "" ? 1 : 0
+  name           = var.tfe_workspace_name
+  organization   = var.tfe_organization_name
+  description    = var.tfe_workspace_description
+  tag_names      = var.tfe_workspace_tags
+  execution_mode = "local"
 }
 
 resource "local_file" "backend" {
   content = templatefile("backend.tftpl", {
-    organization = var.cloud_organization
-    workspace    = var.workspace
+    organization = var.tfe_organization_name
+    workspace    = var.tfe_workspace_name
   })
   filename = "backend.tf"
 }
