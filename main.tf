@@ -14,6 +14,7 @@ terraform {
       version = "~> 2.2.3"
     }
   }
+  backend "local" {}
 }
 
 variable "cloud_organization" {
