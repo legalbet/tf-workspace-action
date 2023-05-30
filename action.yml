@@ -4,8 +4,11 @@ description: Prepare workspace for Terraform
 runs:
   using: composite
   steps:
-    - run: terraform init
+    - run: pwd && ls -la
       shell: bash
-    - run: terraform plan
-      shell: bash
+    # - run: terraform init
+    #   shell: bash
+    #   working-directory: ${{ github.workspace }}
+    # - run: terraform plan
+    #   shell: bash
     
