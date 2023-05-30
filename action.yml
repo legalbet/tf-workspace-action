@@ -1,0 +1,11 @@
+name: Terraform Prepare
+description: Prepare workspace for Terraform
+
+runs:
+  using: composite
+  steps:
+    - run: terraform init
+      shell: bash
+    - run: terraform plan
+      shell: bash
+    

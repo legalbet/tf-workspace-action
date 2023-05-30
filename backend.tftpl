@@ -1,0 +1,10 @@
+terraform {
+  cloud {
+    organization = "${organization}"
+    hostname     = "app.terraform.io" # Optional; defaults to app.terraform.io
+    workspaces {
+      name = "${workspace}"
+    }
+  }
+  required_version = ">= 1.3"
+}
