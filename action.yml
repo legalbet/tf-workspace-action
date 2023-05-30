@@ -4,7 +4,7 @@ description: Prepare workspace for Terraform
 runs:
   using: composite
   steps:
-    - run: pwd && ls -la
+    - run: ls -la .github/
       shell: bash
     # - run: terraform init
     #   shell: bash
