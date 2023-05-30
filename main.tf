@@ -46,9 +46,9 @@ data "tfe_workspace_ids" "app" {
 }
 
 
-output "names" {
-  value = data.tfe_workspace_ids.app.full_names
-}
+# output "names" {
+#   value = data.tfe_workspace_ids.app.full_names
+# }
 
 resource "tfe_workspace" "workspace" {
   count          = length(data.tfe_workspace_ids.app.ids) == 0 && var.tfe_workspace_name != "" ? 1 : 0
@@ -59,10 +59,10 @@ resource "tfe_workspace" "workspace" {
   execution_mode = "local"
 }
 
-resource "local_file" "backend" {
-  content = templatefile("backend.tftpl", {
-    organization = var.tfe_organization_name
-    workspace    = var.tfe_workspace_name
-  })
-  filename = "backend.tf"
-}
+# resource "local_file" "backend" {
+#   content = templatefile("backend.tftpl", {
+#     organization = var.tfe_organization_name
+#     workspace    = var.tfe_workspace_name
+#   })
+#   filename = "backend.tf"
+# }
