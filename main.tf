@@ -40,6 +40,12 @@ variable "tfe_workspace_description" {
   default     = ""
 }
 
+variable "tfe_backend_path" {
+  description = "value of the backend path"
+  type        = string
+  default     = "./"
+}
+
 data "tfe_workspace_ids" "app" {
   names        = [var.tfe_workspace_name != "" ? var.tfe_workspace_name : ""]
   organization = var.tfe_organization_name
@@ -56,13 +62,13 @@ resource "tfe_workspace" "workspace" {
   organization   = var.tfe_organization_name
   description    = var.tfe_workspace_description
   tag_names      = var.tfe_workspace_tags
-  execution_mode = "local"
+  # execution_mode = "local"
 }
 
-# resource "local_file" "backend" {
-#   content = templatefile("backend.tftpl", {
-#     organization = var.tfe_organization_name
-#     workspace    = var.tfe_workspace_name
-#   })
-#   filename = "backend.tf"
-# }
+resource "local_file" "backend" {
+  content = templatefile("backend.tftpl", {
+    organization = var.tfe_organization_name
+    workspace    = var.tfe_workspace_name
+  })
+  filename = "${var.tfe_backend_path}/backend.tf"
+}

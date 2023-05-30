@@ -7,9 +7,6 @@ runs:
     - run: terraform-bin init
       shell: bash
       working-directory: "${{ github.action_path }}"
-    - run: terraform-bin plan -var=tfe_workspace_name="$TF_WORKSPACE" -var=tfe_organization_name="$TF_CLOUD_ORGANIZATION" -var=tfe_workspace_description="${{ github.event.repository.description }}"
+    - run: terraform-bin apply -auto-approve -var=tfe_workspace_name="$TF_WORKSPACE" -var=tfe_organization_name="$TF_CLOUD_ORGANIZATION" -var=tfe_workspace_description="${{ github.event.repository.description }}" -var=tfe_backend_path="${{ github.workspace }}"
       shell: bash
       working-directory: "${{ github.action_path }}"
-    # - run: cp backend.tf "${{ github.workspace }}"
-    #   shell: bash
-    #   working-directory: "${{ github.action_path }}"
